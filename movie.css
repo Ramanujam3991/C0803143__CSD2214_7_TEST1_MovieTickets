@@ -1,3 +1,13 @@
+.seat-map-table{
+    border-spacing: 0.5em;
+}
+
 .ticket-row{
     background-color: gray;
 }
+
+.ticket-td{
+    height: 2.5em;
+    width: 2.5em;
+}
+

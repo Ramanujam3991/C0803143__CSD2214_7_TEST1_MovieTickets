@@ -7,5 +7,5 @@ for(var i = 0; i < row; i++)
 
 for(var i = 0; i < row; i++)
     for(var j = 0; j < col; j++)
-        console.log('rowcol='+i+j)
+    $('.row'+i).append('<td class ="ticket-td td'+i+j+'"></td>')
 })//End of jQuery
