@@ -2,12 +2,34 @@
     border-spacing: 0.5em;
 }
 
-.ticket-row{
+.ticket-row, .info-row{
+    /* background-color: gray; */
+}
+
+
+
+.info-table{
+    border-spacing: 0.8em;
+}
+
+.info-td{
+    height: 2em;
+    width: 2em;
+}
+
+.available{
     background-color: gray;
 }
 
-.ticket-td{
+.selected{
+    background-color: green;
+}
+
+.occupied{
+    background-color: red;
+}
+
+.ticket-row td{
     height: 2.5em;
     width: 2.5em;
 }
-
