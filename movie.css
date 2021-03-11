@@ -33,3 +33,12 @@
     height: 2.5em;
     width: 2.5em;
 }
+
+.buy-tickets{
+    color:white;
+    background-color: indigo;
+    height: 2.5em;
+    width:20em;
+    border-radius: 20em;
+    outline: none;
+}

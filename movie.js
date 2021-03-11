@@ -36,7 +36,7 @@ $('.ticket-row td').click(function(){
 })
 
 $('.buy-tickets').click(function(){
-    alert('open new tab')
+    alert('Opening tab for payment of $'+totalPrice)
 });
 
 })//End of jQuery
