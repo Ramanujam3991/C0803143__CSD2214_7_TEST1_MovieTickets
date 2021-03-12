@@ -50,7 +50,20 @@ $('.buy-tickets').click(function(){
 });
 
 $('.pay').click(function(){
+    Array.prototype.push.apply(already_selected_lst,current_selected_lst);
+    current_selected_lst = [];
+    disableOccupied(already_selected_lst);
     $( "#dialog" ).dialog('close');
 })
+
+function disableOccupied(already_selected_lst){
+    $(already_selected_lst).each(function(element){
+        let class_name = already_selected_lst[element];
+        
+        $('.'+class_name).removeClass('available');
+        $('.'+class_name).removeClass('selected');
+        $('.'+class_name).addClass('occupied');
+    })
+}
 
 })//End of jQuery
