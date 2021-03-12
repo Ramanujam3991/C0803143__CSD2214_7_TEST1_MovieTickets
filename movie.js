@@ -4,7 +4,72 @@ var col = 10;
 var current_selected_lst = [];
 var already_selected_lst = [];
 var totalPrice= 0;
+//Initial load
+sessionStorage.setItem('currentMovie', 'Titanic $20');
 
+
+//Theater screen 1
+sessionStorage.setItem('move1', 'Titanic $20');
+sessionStorage.setItem('current_selected_lst1', current_selected_lst);
+sessionStorage.setItem('already_selected_lst1', already_selected_lst);
+
+
+//Theater screen 2
+sessionStorage.setItem('move2', 'Back to the future $10');
+sessionStorage.setItem('current_selected_lst2', current_selected_lst);
+sessionStorage.setItem('already_selected_lst2', already_selected_lst);
+
+
+//Theater screen 3
+sessionStorage.setItem('move3', 'Ironman $30');
+sessionStorage.setItem('current_selected_lst3', current_selected_lst);
+sessionStorage.setItem('already_selected_lst3', already_selected_lst);
+
+
+
+$('#movie').change(function(){
+
+    //save old theater session
+    if(sessionStorage.getItem('currentMovie') == 'Titanic $20')
+    {
+        sessionStorage.setItem('current_selected_lst1', current_selected_lst);
+        sessionStorage.setItem('already_selected_lst1', already_selected_lst);
+    }
+    else if(sessionStorage.getItem('currentMovie') == 'Back to the future $10')
+    {
+        sessionStorage.setItem('current_selected_lst2', current_selected_lst);
+        sessionStorage.setItem('already_selected_lst2', already_selected_lst);
+    }
+    else{
+        sessionStorage.setItem('current_selected_lst3', current_selected_lst);
+        sessionStorage.setItem('already_selected_lst3', already_selected_lst);
+    }
+
+    //load new theater
+
+    sessionStorage.setItem('currentMovie', $('#movie').find(':selected').text());
+
+    if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move1'))
+    {
+        current_selected_lst = sessionStorage.getItem('current_selected_lst1')
+        already_selected_lst = sessionStorage.getItem('already_selected_lst1')
+    }
+    else if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move2'))
+    {
+        current_selected_lst = sessionStorage.getItem('current_selected_lst2')
+        already_selected_lst = sessionStorage.getItem('already_selected_lst2')
+    }
+    else
+    {
+        current_selected_lst = sessionStorage.getItem('current_selected_lst3')
+        already_selected_lst = sessionStorage.getItem('already_selected_lst3')
+
+    }
+})
+
+
+
+//$('#movie').find(':selected').val()
 //Load the structure in jQuery
 
 for(var i = 0; i < row; i++)
@@ -110,6 +175,7 @@ function disableOccupied(already_selected_lst){
         $('.'+class_name).removeClass('selected');
         $('.'+class_name).addClass('occupied');
     })
+
 }
 function clearPayments(){
     $('.pricing-table tr:eq(0) td:eq(1)').text('');
