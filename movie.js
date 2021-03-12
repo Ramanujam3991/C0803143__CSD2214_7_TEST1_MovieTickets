@@ -46,7 +46,8 @@ $('#movie').change(function(){
         sessionStorage.setItem('current_selected_lst3', current_selected_lst);
         sessionStorage.setItem('already_selected_lst3', already_selected_lst);
     }
-
+    current_selected_lst = [];
+    already_selected_lst = [];
     //load new theater
 
     sessionStorage.setItem('currentMovie', $('#movie').find(':selected').text());
@@ -61,13 +62,13 @@ for(var i = 0; i < row; i++)
 for(var i = 0; i < row; i++)
     for(var j = 0; j < col; j++)
         $('.row'+i).append('<td class ="available td'+i+j+'"></td>')
-
-if(already_selected_lst.length!=0)
-    disableOccupied(already_selected_lst);
+//enableAvailable()
+loadStructure();
 
 function loadStructure(){
 
     enableAvailable();
+    
     if(already_selected_lst.length!=0)
         disableOccupied(already_selected_lst);
 
