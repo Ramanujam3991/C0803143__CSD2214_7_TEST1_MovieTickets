@@ -5,3 +5,4 @@ Logic:
 4.calculate the total price based on selection and movie
 5.store selected row and column in session
 Easy
+Reference: https://stackoverflow.com/questions/38344181/how-can-i-create-session-in-jquery
