@@ -60,20 +60,60 @@ $('.buy-tickets').click(function(){
 });
 
 $('.pay').click(function(){
+    if(payValidation())
+    {
     Array.prototype.push.apply(already_selected_lst,current_selected_lst);
     current_selected_lst = [];
     disableOccupied(already_selected_lst);
     $( "#dialog" ).dialog('close');
+    alert('Booking success!')
+    }
 })
+
+function payValidation(){
+    var isValid = true;
+    $('.error-message').css('color','red');
+    if($('.first-name').val()==''
+    || $('.last-name').val()==''
+    || $('.email').val()==''
+    || $('.CVV').val()==''
+    || $('.expiry').val()==''
+    || $('.card-number').val()==''
+    )
+    {
+        $('.error-message').text('Please enter mandatory fields');
+        
+        isValid = false;
+    }
+    else if($('.card-number').val().length != 16)
+    {
+        $('.error-message').text('Card number should be 16 digit but it is '+$('.card-number').val().length);
+        isValid = false;
+    }
+    else if(isNaN($('.card-number').val()) || isNaN($('.CVV').val()) || isNaN($('.card-number').val()))
+    {
+        $('.error-message').text('Card number, cvv and expiry should be numeric');
+        isValid = false;
+    }
+    else{
+        $('.error-message').text('');
+
+    }
+    return isValid;
+}
 
 function disableOccupied(already_selected_lst){
     $(already_selected_lst).each(function(element){
         let class_name = already_selected_lst[element];
-        
+        clearPayments();
         $('.'+class_name).removeClass('available');
         $('.'+class_name).removeClass('selected');
         $('.'+class_name).addClass('occupied');
     })
 }
-
+function clearPayments(){
+    $('.pricing-table tr:eq(0) td:eq(1)').text('');
+    $('.pricing-table tr:eq(1) td:eq(1)').text('');
+    $('.pricing-table tr:eq(2) td:eq(1)').text('');
+}
 })//End of jQuery
