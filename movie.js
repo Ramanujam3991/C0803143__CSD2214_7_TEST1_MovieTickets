@@ -6,6 +6,7 @@ var already_selected_lst = [];
 var totalPrice= 0;
 //Initial load
 sessionStorage.setItem('currentMovie', 'Titanic $20');
+getDataFromSession();
 
 
 //Theater screen 1
@@ -34,6 +35,7 @@ $('#movie').change(function(){
     {
         sessionStorage.setItem('current_selected_lst1', current_selected_lst);
         sessionStorage.setItem('already_selected_lst1', already_selected_lst);
+
     }
     else if(sessionStorage.getItem('currentMovie') == 'Back to the future $10')
     {
@@ -48,43 +50,69 @@ $('#movie').change(function(){
     //load new theater
 
     sessionStorage.setItem('currentMovie', $('#movie').find(':selected').text());
+    getDataFromSession();
+    loadStructure();
+});
 
-    if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move1'))
-    {
-        current_selected_lst = sessionStorage.getItem('current_selected_lst1')
-        already_selected_lst = sessionStorage.getItem('already_selected_lst1')
-    }
-    else if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move2'))
-    {
-        current_selected_lst = sessionStorage.getItem('current_selected_lst2')
-        already_selected_lst = sessionStorage.getItem('already_selected_lst2')
-    }
-    else
-    {
-        current_selected_lst = sessionStorage.getItem('current_selected_lst3')
-        already_selected_lst = sessionStorage.getItem('already_selected_lst3')
-
-    }
-})
-
-
-
-//$('#movie').find(':selected').val()
 //Load the structure in jQuery
-
 for(var i = 0; i < row; i++)
     $('.seat-map-table').append('<tr class= "ticket-row row'+i+'"></tr>')
 
 for(var i = 0; i < row; i++)
     for(var j = 0; j < col; j++)
-    $('.row'+i).append('<td class ="available td'+i+j+'"></td>')
+        $('.row'+i).append('<td class ="available td'+i+j+'"></td>')
 
 if(already_selected_lst.length!=0)
     disableOccupied(already_selected_lst);
+
+function loadStructure(){
+
+    enableAvailable();
+    if(already_selected_lst.length!=0)
+        disableOccupied(already_selected_lst);
+
+    
+}
+function getDataFromSession(){
+    current_selected_lst = [];
+    already_selected_lst = [];
+    if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move1'))
+    {
+        
+        if(sessionStorage.getItem('current_selected_lst1')!='' && sessionStorage.getItem('current_selected_lst1')!=null)
+            current_selected_lst=sessionStorage.getItem('current_selected_lst1').split(',')
+
+        
+        if(sessionStorage.getItem('already_selected_lst1')!='' && sessionStorage.getItem('already_selected_lst1')!=null)
+            already_selected_lst = sessionStorage.getItem('already_selected_lst1').split(',')
+
+    }
+    else if(sessionStorage.getItem('currentMovie') == sessionStorage.getItem('move2'))
+    {
+        if(sessionStorage.getItem('current_selected_lst2')!='' && sessionStorage.getItem('current_selected_lst2')!=null){
+            current_selected_lst=sessionStorage.getItem('current_selected_lst2').split(',')
+
+        }
+
+        
+        if(sessionStorage.getItem('already_selected_lst2')!='' && sessionStorage.getItem('already_selected_lst2')!=null)
+            already_selected_lst = sessionStorage.getItem('already_selected_lst2').split(',')
+    }
+    else
+    {
+        if(sessionStorage.getItem('current_selected_lst3')!='' && sessionStorage.getItem('current_selected_lst3')!=null)
+            current_selected_lst=sessionStorage.getItem('current_selected_lst3').split(',')
+
+        
+        if(sessionStorage.getItem('already_selected_lst3')!='' && sessionStorage.getItem('already_selected_lst3')!=null)
+            already_selected_lst = sessionStorage.getItem('already_selected_lst3').split(',')
+        
+
+    }
+}
 $('.ticket-row td').click(function(){
     if($(this).hasClass('available'))
     {
-    // alert($(this).attr('class'))
     $(this).removeClass('available');
     $(this).removeClass('occupied');
     $(this).addClass('selected');
@@ -161,7 +189,7 @@ function payValidation(){
         isValid = false;
     }
     else{
-        $('.error-message').text('');
+        $(".error-message").text("");
 
     }
     return isValid;
@@ -174,6 +202,35 @@ function disableOccupied(already_selected_lst){
         $('.'+class_name).removeClass('available');
         $('.'+class_name).removeClass('selected');
         $('.'+class_name).addClass('occupied');
+    })
+
+}
+function enableAvailable(){
+    $('.seat-map-table td').each(function(element){
+        clearPayments();
+        $(this).removeClass('occupied');
+        $(this).removeClass('selected');
+        $(this).addClass('available');
+    })
+
+}
+function disableOccupied(already_selected_lst){
+    $(already_selected_lst).each(function(element){
+        let class_name = already_selected_lst[element];
+        clearPayments();
+        $('.'+class_name).removeClass('available');
+        $('.'+class_name).removeClass('selected');
+        $('.'+class_name).addClass('occupied');
+    })
+
+}
+function highlightSelected(current_selected_lst){
+    $(current_selected_lst).each(function(element){
+        let class_name = current_selected_lst[element];
+        clearPayments();
+        $('.'+class_name).removeClass('available');
+        $('.'+class_name).removeClass('occupied');
+        $('.'+class_name).addClass('selected');
     })
 
 }
