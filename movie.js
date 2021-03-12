@@ -36,7 +36,21 @@ $('.ticket-row td').click(function(){
 })
 
 $('.buy-tickets').click(function(){
-    alert('Opening tab for payment of $'+totalPrice)
+    if(totalPrice == 0)
+    {
+        alert('Please select atleast 1 seat to proceed')
+    }
+    else{
+    alert('Please make the payment to confirm seats');
+    $( "#dialog" ).dialog({
+        minWidth: 360,
+        title:'Payment for movie: $'+totalPrice
+      });
+    }
 });
+
+$('.pay').click(function(){
+    $( "#dialog" ).dialog('close');
+})
 
 })//End of jQuery

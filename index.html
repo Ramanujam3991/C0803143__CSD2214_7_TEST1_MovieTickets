@@ -4,7 +4,9 @@
     <meta charset="UTF-8">
     <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge"> -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://code.jquery.com/jquery-1.11.1.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.11.1/jquery-ui.min.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css" />
     <script src="movie.js" type="text/javascript"></script>
     <link rel="stylesheet" href="movie.css">
     <title>Movie Ticket</title>
@@ -52,6 +54,24 @@
             </table>
             <input type="button" class="buy-tickets" value="buy tickets">
         </section>
+        <div id="dialog" style = "display:none">
+            <form>
+                First Name:<br/>
+                <input type="text" class="first-name" name="first-name"><br/>
+                Last Name:<br/>
+                <input type="text" class="last-name" name="last-name"><br/>
+                Email:<br/>
+                <input type="email" class="email" name="email"><br/>
+                Card 16-digit number:<br/>
+                <input type="text" class="card-number" name="card-number"><br/>
+                Expiry:<br/>
+                <input type="text" class="expiry" name="expiry" placeholder="mmyy"><br/>
+                CVV:<br/>
+                <input type="text" class="CVV" name="CVV" placeholder="3 digit"><br/>
+                <img src="images/credit.png" alt="credit card">
+                <input type="button" value="pay" class="pay">
+            </form>
+        </div>
     </main>
 </body>
 </html>
