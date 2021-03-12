@@ -4,6 +4,9 @@ var col = 10;
 var current_selected_lst = [];
 var already_selected_lst = [];
 var totalPrice= 0;
+
+//Load the structure in jQuery
+
 for(var i = 0; i < row; i++)
     $('.seat-map-table').append('<tr class= "ticket-row row'+i+'"></tr>')
 
@@ -11,7 +14,11 @@ for(var i = 0; i < row; i++)
     for(var j = 0; j < col; j++)
     $('.row'+i).append('<td class ="available td'+i+j+'"></td>')
 
+if(already_selected_lst.length!=0)
+    disableOccupied(already_selected_lst);
 $('.ticket-row td').click(function(){
+    if($(this).hasClass('available'))
+    {
     // alert($(this).attr('class'))
     $(this).removeClass('available');
     $(this).removeClass('occupied');
@@ -32,13 +39,16 @@ $('.ticket-row td').click(function(){
     $('.pricing-table tr:eq(0) td:eq(1)').text('$'+moviePrice);
     $('.pricing-table tr:eq(1) td:eq(1)').text(seatsSelected);
     $('.pricing-table tr:eq(2) td:eq(1)').text('$'+totalPrice);
-
+    }
+    else{
+        alert('Error: Please select an available seat');
+    }
 })
 
 $('.buy-tickets').click(function(){
     if(totalPrice == 0)
     {
-        alert('Please select atleast 1 seat to proceed')
+        alert('Error: Please select atleast 1 seat to proceed')
     }
     else{
     alert('Please make the payment to confirm seats');
